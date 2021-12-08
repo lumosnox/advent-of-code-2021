@@ -38,4 +38,4 @@ def calculate_sum_increase(filename):
 
 if __name__ == '__main__':
     #print(calculate_depth_increase('resources/inputs/day1.txt'))
-    print(calculate_sum_increase('resources/inputs/day1.txt'))
+    print(calculate_sum_increase('resources/inputs/day1/day1.txt'))
