@@ -55,7 +55,7 @@ def fold_left(paper, x, max_x, max_y):
                 paper[y_coord][x_coord] = 1
                 paper[y_coord][max_x - x_coord] = 0
     for y_coord in range(0, max_y + 1):
-        paper[y_coord][x] = 0
+        paper[y_coord][x-1] = 0
 
 
 def fold_up(paper, y, max_x, max_y):
@@ -65,11 +65,13 @@ def fold_up(paper, y, max_x, max_y):
             if paper[max_y - y_coord][x_coord] == 1:
                 paper[y_coord][x_coord] = 1
                 paper[max_y - y_coord][x_coord] = 0
-        paper[y][x_coord] = 0
+        paper[y-1][x_coord] = 0
 
 
 # Part 2
 # there must be a bug - part 2 is not correct!
+# bug is that we still fold using the initial grid size, but when the grid shrinks, the mirroring should only use the leftover area
+# e.g. if the grid was 10x10, but now it's down to 4x4, we fold incorrectly
 def calculate_part2(filename):
     paper = []
     points = []
@@ -111,6 +113,17 @@ def calculate_part2(filename):
 
     return visible_dots
 
+
+def print_grid(grid):
+    for i in range(0, len(grid)):
+        p = ''
+        for el in grid[i]:
+            if el == 0:
+                p = p + '.'
+            else:
+                p = p + '#'
+        print(p)
+    print('')
 
 if __name__ == '__main__':
     print(calculate_part1('resources/inputs/day13/day13.txt'))
